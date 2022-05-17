@@ -1,0 +1,67 @@
+﻿<Window x:Class="L4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:L4"
+        mc:Ignorable="d"
+        Title="train schedule" Height="475" Width="1100" MinHeight="475" MinWidth="1100">
+
+    <Window.Resources>
+        <Style x:Key="cellStyle">
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem x:Name="Save" Header="Save to file" Click="Save_Click"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Exit" Click="Close_Click" ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Add" Click="Add_Click"></MenuItem>
+            <MenuItem Header="About" Click="About_Click"></MenuItem>
+        </Menu>
+        <DataGrid Grid.Row="1" x:Name="train_schedule" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Turquoise"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>   
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn ElementStyle="{StaticResource cellStyle}" Header="№" Binding="{Binding numRecord}" Width="60"></DataGridTextColumn>-->
+                <DataGridTextColumn ElementStyle="{StaticResource cellStyle}" Header="train number" Binding="{Binding trainNumber}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="destination" Binding="{Binding destination}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn ElementStyle="{StaticResource cellStyle}" Header="class" Binding="{Binding classTrain}" Width="70"></DataGridTextColumn>
+                <DataGridTextColumn ElementStyle="{StaticResource cellStyle}" Header="arrives" Binding="{Binding arrives}" Width="60"></DataGridTextColumn>
+                <DataGridTextColumn ElementStyle="{StaticResource cellStyle}" Header="departs" Binding="{Binding departs}" Width="60"></DataGridTextColumn>
+                <DataGridTextColumn Header="additional information" Binding="{Binding additionalInformation}" Width="*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="edit" Name="edit" Click="edit_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="delete" Name="delete" Click="delete_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
